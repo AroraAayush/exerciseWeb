@@ -17,8 +17,8 @@ function SearchExercise({setSearch,setParameter}) {
         </div>
     
             <div className='w-full flex justify-center items-center mt-10'>
-                <input className='w-2/3 min-w-2/3 px-3 py-2 border-gray-400 border-2 rounded-md' type="text" placeholder='Search Exercises' value={val} onChange={(e)=>{setVal(e.target.value)}}/>
-                <button className='bg-orange-600 text-white px-3 py-2 rounded-r-lg' onClick={searchExercise}>Search</button>
+                <input className='w-2/3 min-w-2/3 px-3 py-2 border-gray-400 border-2 rounded-l-md' type="text" placeholder='Search Exercises' value={val} onChange={(e)=>{setVal(e.target.value)}}/>
+                <button className='bg-orange-600 text-white px-3 py-2 rounded-r-md' onClick={searchExercise}>Search</button>
             </div>
 
 

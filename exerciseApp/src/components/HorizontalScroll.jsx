@@ -40,9 +40,9 @@ function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
     const handleScroll=(direction)=>{
       console.log(ref)
       if(direction=="right")
-      ref.current.scrollLeft+=100;
+      ref.current.scrollLeft+=300;
     else
-      ref.current.scrollLeft-=100;
+      ref.current.scrollLeft-=300;
 
     }
   return (
@@ -54,9 +54,9 @@ function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
       <div key={part}><BodyPart part={part} bodyPart={bodyPart} setBodyPart={setBodyPart} setParameter={setParameter}/></div>
       ))}
       </div>
-      <div className='w-full flex flex-row justify-end gap-x-8 pr-6'>
-        <img className='hover:scale-110 hover:ease-in-out duration-150 p-2 bg-orange-200 rounded-md' src={LeftArrowIcon} alt="" onClick={()=>handleScroll("left")} />
-        <img className='hover:scale-110 hover:ease-in-out duration-150 p-2 bg-orange-200 rounded-md'  src={RightArrowIcon} alt="" onClick={()=>{handleScroll("right")}} />
+      <div className='w-full flex flex-row justify-end gap-x-8 pr-6 mt-4'>
+        <img className='hover:scale-110 hover:ease-in-out duration-150 p-2  rounded-md' src={LeftArrowIcon} alt="" onClick={()=>handleScroll("left")} />
+        <img className='hover:scale-110 hover:ease-in-out duration-150 p-2  rounded-md'  src={RightArrowIcon} alt="" onClick={()=>{handleScroll("right")}} />
       </div>
       </div>
     // </ScrollMenu>

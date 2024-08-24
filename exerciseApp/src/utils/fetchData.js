@@ -9,10 +9,18 @@ export const options = {
 	}
 };
 
+
+export const options2 = {
+	method: 'GET',
+	headers: {
+	  'x-rapidapi-key': String(import.meta.env.VITE_RAPID_API_KEY),
+	  'x-rapidapi-host': 'youtube-search-and-download.p.rapidapi.com'
+	}
+  };
+
 export const fetchData=async(url,options)=>{
     const response=await fetch(url,options);
     const data=await response.json();
-	prev=prev+10;
 
     return data;
 }
