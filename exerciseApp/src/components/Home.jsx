@@ -8,7 +8,7 @@ function Home() {
 
   // console.log("rendering home component with : , ",filteredExercises)
   return (
-    <div className='  px-6  w-full  mt-6 '>
+    <div id='home' className='min-h-screen max-h-fit px-6  w-full  mt-6 '>
       <Hero/>
       <SearchExercise setSearch={setSearch} setParameter={setParameter} />
       <HorizontalScroll bodyPart={bodyPart} setBodyPart={setBodyPart} setParameter={setParameter} />

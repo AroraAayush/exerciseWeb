@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { fetchData,options } from '../utils/fetchData';
-import {BodyPart} from './index'
+import {BodyPart,Loader} from './index'
 import RightArrowIcon from '../assets/icons/right-arrow.png'
 import LeftArrowIcon from '../assets/icons/left-arrow.png'
 import { ScrollMenu,VisibilityContext } from 'react-horizontal-scrolling-menu';
+
+
 function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
+  const [loading,setLoading]=useState(true);
   console.log("rendering horizontal scroll component")
     const [bodyParts,setBodyParts]=useState([])
     
@@ -15,6 +18,8 @@ function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
             ,options);
             console.log(response);
             setBodyParts(response);
+            console.log("setting loading false")
+            setLoading(false);
         }
         getBodyParts();
     },[])
@@ -48,9 +53,10 @@ function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
   return (
 
     // <ScrollMenu LeftArrow={LeftArrowIcon} RightArrow={RightArrowIcon}>
-      <div>
-      <div ref={ref} className='flex flex-row overflow-x-auto scrollbar-none overflow-y-hidden gap-x-8 mt-10 px-3 py-4 transition-all duration-200 ease-in-out'>
-      {bodyParts.map((part)=>(
+<>
+    
+    {loading==true ? <div><Loader/> </div> : (bodyParts && bodyParts.length>0? <div><div ref={ref} className='flex flex-row overflow-x-auto scrollbar-none overflow-y-hidden gap-x-8 mt-10 px-3 py-4 transition duration-1000 delay-75 ease-in-out'>
+      {bodyParts && bodyParts.map((part)=>(
       <div key={part}><BodyPart part={part} bodyPart={bodyPart} setBodyPart={setBodyPart} setParameter={setParameter}/></div>
       ))}
       </div>
@@ -59,6 +65,12 @@ function HorizontalScroll({bodyPart,setBodyPart,setParameter}) {
         <img className='hover:scale-110 hover:ease-in-out duration-150 p-2  rounded-md'  src={RightArrowIcon} alt="" onClick={()=>{handleScroll("right")}} />
       </div>
       </div>
+       :<div></div>)
+      
+      
+      
+      }
+      </>
     // </ScrollMenu>
     
   )

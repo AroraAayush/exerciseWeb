@@ -3,7 +3,10 @@ import { fetchData,options } from '../utils/fetchData';
 // import ReactPaginate from 'react-paginate';
 import {Pagination} from '@mui/material'
 import ExerciseCard from './ExerciseCard';
+import {Loader,DataNotFound} from './index'
+
 function Exercises({bodyPart,search}) {
+  const [loading,setLoading]=useState(true);
   console.log("rendering exercisee comp ")
   const [allexercises,setAllExercises]=useState([]);
   const [currentPage,setcurrentPage]=useState(1);
@@ -24,6 +27,7 @@ const getExercisesByBodyPart=async()=>
     const response=await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=100`,options);
     console.log(response);
     setAllExercises(response);
+    setLoading(false)
   }
   
   const getExercisesBySearchFilter=async()=>{
@@ -36,6 +40,7 @@ const getExercisesByBodyPart=async()=>
           item.bodyPart.toLowerCase().includes(search)
       )
       setAllExercises(filteredList);
+      setLoading(false)
   }
 
   const getExercisesByBothParam=async()=>{
@@ -47,11 +52,13 @@ const getExercisesByBodyPart=async()=>
       item.bodyPart.toLowerCase().includes(search)
   )
   setAllExercises(filteredList);
+  setLoading(false)
   }
 if(search=="" && bodyPart=="")
 {
   console.log("both filters empty")
   setAllExercises([]);
+  setLoading(false)
 }
 else if(search=="" && bodyPart!="")
 {
@@ -68,12 +75,14 @@ console.log("both parameters are set")
 }
   },[bodyPart,search])
   return (
-    <div>
+    <div id="exercises">
+      
       <div className='text-3xl mt-10 mb-4'>Showing Results</div>
-      <div className='flex flex-wrap gap-x-9 gap-y-10 justify-center items-center'>      {currentExercises && currentExercises.map((exercise)=>(
+      {loading==true?<Loader/>:(currentExercises && currentExercises.length>0 ?  <div className='flex flex-wrap gap-x-9 gap-y-10 justify-center items-center'>      {currentExercises && currentExercises.map((exercise)=>(
         <div key={exercise.id}><ExerciseCard exercise={exercise}/></div>
       ))}
-      </div>
+      </div> : <DataNotFound/>)}
+     
 <div className='w-full flex justify-center mt-10'>
       {allexercises.length>9 && 
       (<Pagination 
